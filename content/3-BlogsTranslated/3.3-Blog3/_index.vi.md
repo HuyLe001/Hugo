@@ -1,7 +1,7 @@
 ﻿---
 title: "Hướng dẫn Amazon DocumentDB Serverless dành cho Nhà phát triển Game"
 date: "2025-09-11"
-weight: 2
+weight: 3
 chapter: false
 pre: " <b> 3.3. </b> "
 ---
