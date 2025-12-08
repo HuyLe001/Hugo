@@ -1,7 +1,7 @@
 ﻿---
 title: "Làm cho các Sản phẩm SaaS dễ Tiếp cận trong AWS Marketplace"
 date: "2025-09-11"
-weight: 1
+weight: 3
 chapter: false
 pre: " <b> 3.2. </b> "
 ---
