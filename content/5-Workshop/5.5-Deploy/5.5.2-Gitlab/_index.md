@@ -16,8 +16,8 @@ Add necessary variables:
 - `EC2_IP`
 - `SSH_PRIVATE_KEY`
 
-![GitLab CI 1](/static/images/2-Proposal/gitlab%20ci-1.png)
-![GitLab CI 2](/static/images/2-Proposal/gitlab%20ci%20-%202.png)
+![GitLab CI 1](/images/2-Proposal/gitlab%20ci-1.png)
+![GitLab CI 2](/images/2-Proposal/gitlab%20ci%20-%202.png)
 
 ### 2. Configuration file .gitlab-ci.yml
 Create a `.gitlab-ci.yml` file at the root of the project.
@@ -27,4 +27,4 @@ The workflow includes:
 
 
 Example of a successful pipeline:
-![Success](/static/images/2-Proposal/success.png)
+![Success](/images/2-Proposal/success.png)

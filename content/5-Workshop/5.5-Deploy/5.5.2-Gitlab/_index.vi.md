@@ -16,8 +16,8 @@ Thêm các biến cần thiết:
 - `EC2_IP`
 - `SSH_PRIVATE_KEY`
 
-![GitLab CI 1](/static/images/2-Proposal/gitlab%20ci-1.png)
-![GitLab CI 2](/static/images/2-Proposal/gitlab%20ci%20-%202.png)
+![GitLab CI 1](/images/2-Proposal/gitlab%20ci-1.png)
+![GitLab CI 2](/images/2-Proposal/gitlab%20ci%20-%202.png)
 
 ### 2. File cấu hình .gitlab-ci.yml
 Tạo file `.gitlab-ci.yml` tại thư mục gốc của dự án.
@@ -27,5 +27,5 @@ Quy trình gồm:
 
 
 Ví dụ pipeline thành công:
-![Success](/static/images/2-Proposal/success.png)
+![Success](/images/2-Proposal/success.png)
 

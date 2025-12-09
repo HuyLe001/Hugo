@@ -14,7 +14,7 @@ ALB sẽ phân phối traffic tới các EC2 instance và xử lý SSL terminati
 
 ### 1. Tạo Security Group cho ALB
 Cho phép HTTP (80) và HTTPS (443) từ 0.0.0.0/0.
-![ALB SG](/static/images/2-Proposal/alb-sg.png)
+![ALB SG](/images/2-Proposal/alb-sg.png)
 
 ### 2. Tạo Target Group
 1. Tạo Target Group loại **Instances**.
@@ -30,11 +30,11 @@ Cho phép HTTP (80) và HTTPS (443) từ 0.0.0.0/0.
     - HTTP:80 -> Redirect to HTTPS (được khuyến nghị).
     - HTTPS:443 -> Forward to Target Group.
 6. Tại phần HTTPS listener, chọn ACM Certificate đã tạo.
-![SSL ABL 1](/static/images/2-Proposal/ssl-alb-1.png)
-![SSL ABL 2](/static/images/2-Proposal/ssl-alb-2.png)
-![SSL ABL 3](/static/images/2-Proposal/ssl-alb-3.png)
+![SSL ABL 1](/images/2-Proposal/ssl-alb-1.png)
+![SSL ABL 2](/images/2-Proposal/ssl-alb-2.png)
+![SSL ABL 3](/images/2-Proposal/ssl-alb-3.png)
 
 7. Nhấn **Create load balancer**.
 
 Sau khi tạo Load Balancer, ta có thể cấu hình lại security group cho EC2 instance chỉ nhận inbound rule từ Load Balancer
-![Edit EC2 SG](/static/images/2-Proposal/edit-ec2-sg.png)
+![Edit EC2 SG](/images/2-Proposal/edit-ec2-sg.png)

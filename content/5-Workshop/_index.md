@@ -16,7 +16,7 @@ Complete the installation and configuration of necessary AWS services to operate
 ## Architecture
 We will follow this architecture:
 
-![Auction System Architecture](/static/images/2-Proposal/Proposal.jpg)
+![Auction System Architecture](/images/2-Proposal/Proposal.jpg)
 
 ## Steps
 1. **Preparation**: Setup VPC, IAM Role.

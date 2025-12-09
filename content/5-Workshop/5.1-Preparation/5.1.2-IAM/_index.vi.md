@@ -18,7 +18,7 @@ EC2 cần quyền truy cập vào S3 để lấy code/ảnh, và quyền gọi A
 4. Tại **Use case**, chọn **EC2**.
 5. Nhấn **Next**.
 
-![IAM Step 1](/static/images/2-Proposal/iam-1.png)
+![IAM Step 1](/images/2-Proposal/iam-1.png)
 
 1. Tại bước **Add permissions**, tìm và chọn các Policy sau:
     - `AmazonS3FullAccess` (Hoặc policy giới hạn chỉ bucket của pj).
@@ -29,4 +29,4 @@ EC2 cần quyền truy cập vào S3 để lấy code/ảnh, và quyền gọi A
 3. Đặt tên Role là `Auction-EC2-Role`.
 4. Xem lại và nhấn **Create role**.
 
-![IAM Step 2](/static/images/2-Proposal/iam-2.png)
+![IAM Step 2](/images/2-Proposal/iam-2.png)
