@@ -1,15 +1,16 @@
 ---
 title: "Compute"
-date: "2025-12-09"
+date: "`r Sys.Date()`"
 weight: 3
 chapter: false
-pre: " <b> 5.3. </b> "
+pre: " <b> 5.3 </b> "
 ---
 
-# Compute Layer
+# Initialize Amazon EC2
 
-In this section, you will deploy and configure EC2 instances for running your application.
+Amazon EC2 (Elastic Compute Cloud) will be where the backend application (Spring Boot) runs.
 
-#### Content
-
-1. [Amazon EC2](5.3.1-EC2/)
+## Content
+1. **EC2 Instance**: Virtual server running the application.
+2. **Security Group**: Firewall controlling access.
+3. **Elastic IP**: Static IP address (optional, necessary if not using a Load Balancer or need a fixed outbound IP).

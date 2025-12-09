@@ -1,16 +1,16 @@
 ---
 title: "CI/CD"
-date: "2025-12-09"
+date: "`r Sys.Date()`"
 weight: 5
 chapter: false
-pre: " <b> 5.5. </b> "
+pre: " <b> 5.5 </b> "
 ---
 
-# CI/CD Pipeline
+# Continuous Integration and Deployment (CI/CD)
 
-In this section, you will set up automated deployment using GitLab CI/CD.
+Use GitLab CI to automate the process of building and deploying the application to AWS.
 
-#### Content
-
-1. [Setup EC2 Instance Environment](5.5.1-Setup-EC2/)
-2. [GitLab CI](5.5.2-Gitlab/)
+## Content
+1. SSH into EC2 instance to install necessary applications.
+2. **GitLab Runner**: Configure runner on EC2 (or use Shared Runner).
+3. **Pipeline**: Define `.gitlab-ci.yml` file.

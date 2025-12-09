@@ -1,15 +1,31 @@
 ---
 title: "GitLab CI"
-date: "2025-12-09"
-weight: 2
+date: "`r Sys.Date()`"
+weight: 1
 chapter: false
-pre: " <b> 5.5.2. </b> "
+pre: " <b> 5.5.2 </b> "
 ---
 
-# GitLab CI - Continuous Integration
+# Cấu hình GitLab CI
 
-Trong phần này, bạn sẽ cấu hình GitLab CI/CD pipeline cho triển khai tự động.
+## Các bước thực hiện
 
-{{% notice info %}}
-Thêm các bước cấu hình GitLab CI và thiết lập pipeline của bạn ở đây.
-{{% /notice %}}
+### 1. Chuẩn bị biến môi trường (Variables)
+Vào **Settings** -> **CI/CD** -> **Variables** trên GitLab Repository.
+Thêm các biến cần thiết:
+- `EC2_IP`
+- `SSH_PRIVATE_KEY`
+
+![GitLab CI 1](/static/images/2-Proposal/gitlab%20ci-1.png)
+![GitLab CI 2](/static/images/2-Proposal/gitlab%20ci%20-%202.png)
+
+### 2. File cấu hình .gitlab-ci.yml
+Tạo file `.gitlab-ci.yml` tại thư mục gốc của dự án.
+Quy trình gồm:
+- **Build**: Build file JAR (Spring Boot) hoặc Docker Image.
+- **Deploy**: Copy file lên EC2 và restart service.
+
+
+Ví dụ pipeline thành công:
+![Success](/static/images/2-Proposal/success.png)
+

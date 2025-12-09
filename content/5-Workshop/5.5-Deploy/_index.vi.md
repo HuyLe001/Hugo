@@ -1,16 +1,16 @@
 ---
 title: "CI/CD"
-date: "2025-12-09"
+date: "`r Sys.Date()`"
 weight: 5
 chapter: false
-pre: " <b> 5.5. </b> "
+pre: " <b> 5.5 </b> "
 ---
 
-# CI/CD Pipeline
+# Tích hợp và Triển khai liên tục (CI/CD)
 
-Trong phần này, bạn sẽ thiết lập triển khai tự động sử dụng GitLab CI/CD.
+Sử dụng GitLab CI để tự động hóa quy trình build và deploy ứng dụng lên AWS.
 
-#### Nội dung
-
-1. [Thiết lập môi trường EC2 Instance](5.5.1-Setup-EC2/)
-2. [GitLab CI](5.5.2-Gitlab/)
+## Nội dung
+1. SSH vào EC2 instance để cài đặt những ứng dụng cần thiết
+2. **GitLab Runner**: Cấu hình runner trên EC2 (hoặc dùng Shared Runner).
+3. **Pipeline**: Định nghĩa file `.gitlab-ci.yml`.

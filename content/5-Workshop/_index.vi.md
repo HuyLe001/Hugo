@@ -1,31 +1,27 @@
 ---
 title: "Triển khai hệ thống"
-date: "2025-09-11"
+date: "`r Sys.Date()`"
 weight: 5
-chapter: false
+chapter: true
 pre: " <b> 5. </b> "
 ---
 
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
+# Triển khai hệ thống Auction trên AWS
 
+Chào mừng bạn đến với workshop triển khai hệ thống đấu giá trực tuyến trên nền tảng AWS. Trong workshop này, chúng ta sẽ cùng nhau xây dựng từng thành phần của hệ thống dựa trên kiến trúc đã đề xuất.
 
-# Triển khai hệ thống trên AWS
+## Mục tiêu
+Hoàn thành việc cài đặt và cấu hình các dịch vụ AWS cần thiết để vận hành hệ thống Auction System.
 
-#### Tổng quan
+## Kiến trúc
+Chúng ta sẽ bám sát kiến trúc sau:
 
-Trong workshop này, bạn sẽ học cách triển khai một hệ thống hoàn chỉnh trên AWS sử dụng nhiều dịch vụ bao gồm VPC, RDS, ElastiCache, S3, EC2, Load Balancer, CloudFront, Route 53 và GitLab CI/CD.
+![Auction System Architecture](/static/images/2-Proposal/Proposal.jpg)
 
-#### Kiến trúc
-
-Hệ thống tuân theo kiến trúc đa tầng với các lớp riêng biệt cho networking, database, compute, distribution và tự động hóa triển khai.
-
-#### Nội dung
-
-1. [Chuẩn bị](5.1-Preparation/)
-2. [Database & Storage](5.2-Database-Storage/)
-3. [Compute](5.3-Compute/)
-4. [Distribution](5.4-Distribution/)
-5. [CI/CD](5.5-Deploy/)
-6. [Dọn dẹp tài nguyên](5.6-CleanUp/)
+## Các bước thực hiện
+1. **Chuẩn bị (Preparation)**: Thiết lập VPC, IAM Role.
+2. **Cơ sở dữ liệu & Lưu trữ (Database & Storage)**: Cấu hình RDS, ElastiCache, S3.
+3. **Tính toán (Compute)**: Cài đặt và cấu hình EC2.
+4. **Phân phối (Distribution)**: Cấu hình Load Balancer, CloudFront, Route 53.
+5. **CI/CD**: Thiết lập quy trình triển khai tự động với GitLab CI.
+6. **Dọn dẹp (Clean up)**: Xóa tài nguyên sau khi hoàn thành.

@@ -1,15 +1,32 @@
 ---
 title: "Create IAM Role"
-date: "2025-12-09"
+date: "`r Sys.Date()`"
 weight: 2
 chapter: false
-pre: " <b> 5.1.2. </b> "
+pre: " <b> 5.1.2 </b> "
 ---
 
-# Create IAM Role
+# Create IAM Role for EC2
 
-In this section, you will create necessary IAM Roles for EC2 to access S3 and other AWS services.
+EC2 needs access to S3 to retrieve code/images, and permissions to call Rekognition and Textract APIs. Instead of storing Access Keys in the code, we will use an IAM Role attached to the EC2 instance.
 
-{{% notice info %}}
-Add your IAM Role creation steps and policy details here.
-{{% /notice %}}
+## Steps
+
+1. Access **IAM Dashboard**.
+2. Select **Roles** -> **Create role**.
+3. In the **Trusted entity type** step, select **AWS service**.
+4. In **Use case**, select **EC2**.
+5. Click **Next**.
+
+![IAM Step 1](/static/images/2-Proposal/iam-1.png)
+
+6. In the **Add permissions** step, search and select the following Policies:
+    - `AmazonS3FullAccess` (Or a policy limited to the project bucket only).
+    - `AmazonRekognitionFullAccess`.
+    - `AmazonTextractFullAccess`.
+    - `AmazonSSMManagedInstanceCore` (To remote into EC2 via Session Manager if needed).
+7. Click **Next**.
+8. Name the Role `Auction-EC2-Role`.
+9. Review and click **Create role**.
+
+![IAM Step 2](/static/images/2-Proposal/iam-2.png)

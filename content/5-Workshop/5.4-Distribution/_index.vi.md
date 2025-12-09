@@ -1,18 +1,17 @@
 ---
 title: "Distribution"
-date: "2025-12-09"
+date: "`r Sys.Date()`"
 weight: 4
 chapter: false
-pre: " <b> 5.4. </b> "
+pre: " <b> 5.4 </b> "
 ---
 
-# Lớp Distribution
+# Phân phối nội dung
 
-Trong phần này, bạn sẽ cấu hình load balancing, CDN và DNS services cho ứng dụng của mình.
+Phần này giúp đưa ứng dụng đến người dùng cuối một cách bảo mật và hiệu năng cao.
 
-#### Nội dung
-
-1. [Certificate Manager](5.4.1-SSL-Certificate/)
-2. [Application Load Balancer](5.4.2-ALB/)
-3. [Amazon CloudFront](5.4.3-CloudFront/)
-4. [Amazon Route 53](5.4.4-Route53/)
+## Nội dung
+1. **Certificate (ACM)**: Cấp phát chứng chỉ SSL/TLS miễn phí.
+2. **Application Load Balancer (ALB)**: Cân bằng tải cho Backend (Spring Boot).
+3. **CloudFront**: CDN phân phối Frontend (ReactJS) và Static files (S3).
+4. **Route 53**: Quản lý DNS domain.

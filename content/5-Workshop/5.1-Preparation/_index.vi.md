@@ -1,16 +1,15 @@
 ---
 title: "Chuẩn bị"
-date: "2025-12-09"
+date: "`r Sys.Date()`"
 weight: 1
 chapter: false
-pre: " <b> 5.1. </b> "
+pre: " <b> 5.1 </b> "
 ---
 
 # Chuẩn bị môi trường
 
-Trước khi triển khai các dịch vụ chính, chúng ta cần chuẩn bị lớp networking và quyền truy cập (IAM) cho các tài nguyên.
+Trước khi đi vào cài đặt các dịch vụ chính, chúng ta cần chuẩn bị lớp mạng (Networking) và quyền truy cập (IAM) cho các tài nguyên.
 
-#### Nội dung
-
-1. [Tạo VPC](5.1.1-VPC/)
-2. [Tạo IAM Role](5.1.2-IAM/)
+### Nội dung
+1. **VPC**: Tạo Virtual Private Cloud để cô lập mạng cho hệ thống.
+2. **IAM**: Tạo các Role cần thiết cho EC2 truy cập S3, Rekognition, Textract.

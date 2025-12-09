@@ -1,29 +1,27 @@
 ---
 title: "System Deployment"
-date: "2025-09-11"
+date: "`r Sys.Date()`"
 weight: 5
-chapter: false
+chapter: true
 pre: " <b> 5. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Note:** The information below is for reference purposes only. Please **do not copy verbatim** for your report, including this warning.
-{{% /notice %}}
 
-# Deploy System on AWS
+# Deploy Auction System on AWS
 
-#### Overview
+Welcome to the workshop on deploying an online auction system on the AWS platform. In this workshop, we will build each component of the system together based on the proposed architecture.
 
-In this workshop, you will learn how to deploy a complete system on AWS using various services including VPC, RDS, ElastiCache, S3, EC2, Load Balancer, CloudFront, Route 53, and GitLab CI/CD.
+## Objectives
+Complete the installation and configuration of necessary AWS services to operate the Auction System.
 
-#### Architecture
+## Architecture
+We will follow this architecture:
 
-The system follows a multi-tier architecture with separate layers for networking, database, compute, distribution, and deployment automation.
+![Auction System Architecture](/static/images/2-Proposal/Proposal.jpg)
 
-#### Content
-
-1. [Preparation](5.1-Preparation/)
-2. [Database & Storage](5.2-Database-Storage/)
-3. [Compute](5.3-Compute/)
-4. [Distribution](5.4-Distribution/)
-5. [CI/CD](5.5-Deploy/)
-6. [Clean Up](5.6-CleanUp/)
+## Steps
+1. **Preparation**: Setup VPC, IAM Role.
+2. **Database & Storage**: Configure RDS, ElastiCache, S3.
+3. **Compute**: Install and configure EC2.
+4. **Distribution**: Configure Load Balancer, CloudFront, Route 53.
+5. **CI/CD**: Setup automated deployment process with GitLab CI.
+6. **Clean up**: Delete resources after completion.

@@ -1,29 +1,22 @@
 ---
 title: "Clean Up"
-date: "2025-12-09"
+date: "`r Sys.Date()`"
 weight: 6
 chapter: false
-pre: " <b> 5.6. </b> "
+pre: " <b> 5.6 </b> "
 ---
 
 # Clean Up Resources
 
-Congratulations on completing this workshop!
+To avoid unwanted costs after completing the workshop, please delete resources in the following order:
 
-To avoid incurring charges, please delete all resources created during this workshop.
+## Deletion Order
+1. **EC2**: Terminate instances.
+2. **RDS & ElastiCache**: Delete database and cache cluster. Delete Subnet Groups and Snapshots.
+3. **Load Balancer & Target Group**: Delete ALB first, then Target Group.
+4. **CloudFront**: Disable distribution, wait for deployment to finish, then Delete.
+5. **S3**: Empty bucket (delete all objects) then Delete bucket.
+6. **NAT Gateway & Elastic IP**: Delete NAT Gateway -> Release Elastic IP.
+7. **VPC**: Delete VPC (this will automatically delete Subnets, Internet Gateway, Route Tables, and related Security Groups).
 
-#### Steps to clean up:
-
-1. Delete CloudFront distribution
-2. Delete Route 53 records
-3. Delete Application Load Balancer
-4. Terminate EC2 instances
-5. Delete RDS database
-6. Delete ElastiCache cluster
-7. Empty and delete S3 buckets
-8. Delete VPC and related resources
-9. Delete IAM roles (if not needed)
-
-{{% notice warning %}}
-Make sure to delete resources in the correct order to avoid dependency errors.
-{{% /notice %}}
+> **Note**: Check the Billing Dashboard the next day to ensure there are no incurring costs.

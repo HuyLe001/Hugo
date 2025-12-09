@@ -1,17 +1,16 @@
 ---
 title: "Database & Storage"
-date: "2025-12-09"
+date: "`r Sys.Date()`"
 weight: 2
 chapter: false
-pre: " <b> 5.2. </b> "
+pre: " <b> 5.2 </b> "
 ---
 
-# Thiết lập Database và Storage
+# Cài đặt Cơ sở dữ liệu và Lưu trữ
 
-Trong phần này, chúng ta sẽ khởi tạo các dịch vụ database và storage cho backend của ứng dụng.
+Trong phần này, chúng ta sẽ khởi tạo:
+1. **Amazon RDS**: Cơ sở dữ liệu quan hệ (MySQL).
+2. **Amazon ElastiCache**: Redis cache.
+3. **Amazon S3**: Lưu trữ object (ảnh, source code).
 
-#### Nội dung
-
-1. [Amazon RDS](5.2.1-RDS/)
-2. [Amazon ElastiCache](5.2.2-ElastiCache/)
-3. [Amazon S3](5.2.3-S3/)
+Các dịch vụ này sẽ đóng vai trò backend lưu trữ dữ liệu cho ứng dụng.
