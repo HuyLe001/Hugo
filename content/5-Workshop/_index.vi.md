@@ -1,5 +1,5 @@
 ---
-title: "Workshop"
+title: "Triển khai hệ thống"
 date: "2025-09-11"
 weight: 5
 chapter: false
