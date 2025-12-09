@@ -26,7 +26,7 @@ The project brings an online auction platform that is easily accessible to every
 ### 3. Solution Architecture
 The platform applies AWS architecture for data management. Public data is stored in public S3 buckets and displayed to users via CloudFront and S3 with ReactJS. All processing operations are performed on EC2 with the Springboot platform. Identity information is processed by Amazon Rekognition and Textract and then stored in private S3 buckets.
 
-![Auction System Architecture](/static/images/2-Proposal/Proposal.jpg)
+![Auction System Architecture](/images/2-Proposal/Proposal.jpg)
 
 *AWS Services Used*
 - *AWS VPC*: Create a private virtual network environment.
