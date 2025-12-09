@@ -27,4 +27,3 @@ The system follows a multi-tier architecture with separate layers for networking
 4. [Distribution](5.4-Distribution/)
 5. [CI/CD](5.5-Deploy/)
 6. [Clean Up](5.6-CleanUp/)
-6. [Clean up](5.6-Cleanup/)
