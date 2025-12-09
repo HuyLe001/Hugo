@@ -1,123 +1,106 @@
 ---
-title: "Proposal"
-date: "2025-11-11"
+title: "Bản đề xuất"
+date: "`r Sys.Date()`"
 weight: 2
 chapter: false
 pre: " <b> 2. </b> "
 ---
 
-{{% notice warning %}}
+# Auction system build in AWS Cloud infrastructure
+## Hệ thống web đấu giá xây dựng trên nền tảng điện toán đám mây của Amazon Web Service  
 
-{{% /notice %}}
-
-# CloudRead – Online Ebook Reading Platform  
-## Giải pháp đọc và quản lý sách trực tuyến trên nền tảng Java + AWS  
-
-### 1. Tóm tắt điều hành  
-**CloudRead** là dự án học thuật của nhóm 5 sinh viên Công nghệ thông tin, hướng đến việc phát triển một nền tảng đọc và quản lý sách điện tử (ebook) chạy trên **hạ tầng AWS**.  
-Người dùng có thể đăng ký tài khoản, tìm kiếm và đọc ebook trực tuyến qua trình đọc PDF tích hợp, đồng thời nhận email thông báo hoặc hỗ trợ khôi phục mật khẩu qua **Amazon SES**.  
-Hệ thống được phát triển bằng **Spring Boot (Java 17)** cho backend, **HTML/CSS/JavaScript (Vanilla JS)** cho frontend, và triển khai trên **AWS** với các dịch vụ **EC2, RDS, S3, CloudFront, SES, IAM, CloudWatch và CodePipeline**.  
-Mục tiêu của dự án là xây dựng một nền tảng đọc sách số ổn định, chi phí thấp, dễ mở rộng và mang tính học thuật cao.  
-
----
+### 1. Tóm tắt điều hành   
+Auction system được thiết kế bởi sinh viên FPTU tại TP. Hồ Chí Minh và vận hành trên nền tảng Cloud AWS. Nền tảng tận dụng các dịch vụ AWS để xây dựng một sàn đấu giá trực tuyến với giao diện thân thiện, dễ dàng sử dụng phù hợp với tất cả mọi người
 
 ### 2. Tuyên bố vấn đề  
-
 *Vấn đề hiện tại*  
-Phần lớn các nền tảng ebook miễn phí như **nhasachmienphi.com** chỉ cho phép người dùng tải về hoặc đọc trực tiếp, thiếu các tính năng cơ bản như phân quyền, thống kê truy cập, hoặc đánh giá nội dung.  
-Ngoài ra, nhiều nền tảng thương mại có chi phí triển khai và vận hành cao, không phù hợp với quy mô sinh viên hoặc dự án học thuật.  
+Hiện tại những hệ thống đấu giá vẫn chưa tiếp cận được đến nhiều người bởi vì sự khó tiếp cận. Dự án này ra đời để mang đến một nền tảng đấu giá trực tiếp minh bạch, thân thiện dễ tiếp cận đến mọi người.
 
 *Giải pháp*  
-CloudRead được thiết kế như một nền tảng học tập – trình diễn công nghệ giúp:  
-- Lưu trữ và phân phối ebook qua **Amazon S3 + CloudFront (Signed URL)**.  
+Nền tảng sử dụng AWS CloudFront và S3 Storage kết hợp ReactJS cung cấp giao diện web , với máy chủ EC2 đảm nhiệm toàn bộ công việc xử lí trên nền tảng Springboot, Amazon S3 để lưu trữ dữ liệu công khai và riêng tư, AWS RDS để lưu trữ cơ sở dữ liệu. Kết hợp cùng Amazon Rekognition và Textract để trích xuất thông tin, xác minh thông tin người dùng để đảm bảo tính công bằng. Với nền tảng này, người dùng có thể đăng ký tài khoản mới, xác thực và tham gia những phiên đấu giá hấp dẫn trên nền tảng.  
 
-- Quản lý người dùng, sách và đánh giá qua **Amazon RDS MySQL**.  
-- Triển khai backend Spring Boot trực tiếp trên **Amazon EC2**.  
-- Phát hành giao diện frontend tĩnh qua **S3 + CloudFront**.  
-- Gửi email xác nhận, hỗ trợ người dùng qua **Amazon SES (SMTP)**.  
-- Tự động hóa quá trình build & deploy bằng **AWS CodePipeline → CodeBuild → CodeDeploy**.  
-- Giám sát log, hiệu năng và chi phí qua **Amazon CloudWatch**.  
-
-*Lợi ích & ROI*  
-- Giúp sinh viên thực hành đầy đủ quy trình phát triển và triển khai ứng dụng cloud thực tế.  
-- Dễ vận hành, có thể chạy 24/7 trên AWS với chi phí thấp.  
-- Củng cố kiến thức về hệ thống phân tán, bảo mật, DevOps và tối ưu hạ tầng.  
-- Sản phẩm có thể mở rộng thêm tính năng học tập, chia sẻ và phân loại sách trong tương lai.  
-
----
+*Lợi ích và hoàn vốn đầu tư (ROI)*  
+Dự án mang đến một nền tảng đấu giá trực tuyến dễ dàng tiếp cận đến mọi người. Chi phí hàng tháng ước tính 59.37 USD (theo AWS Pricing Calculator). Không phát sinh chi phí phát triển thêm.   
 
 ### 3. Kiến trúc giải pháp  
+Nền tảng áp dụng kiến trúc AWS để quản lý dữ liệu. Dữ liệu công khai được lưu trữ trong S3 public bucket và hiển thị đến người dùng qua CloudFront và S3 với ReactJS. Mọi thao tác xử lí được thực hiện trên EC2 với nền tảng Springboot. Các thông tin định danh được xử lí bởi Amazon Rekognition và Textract sau đó lưu trữ trong S3 private bucket 
 
-CloudRead sử dụng mô hình **3 lớp kết hợp các dịch vụ AWS**.  
-Người dùng truy cập website thông qua **Route 53**, được phân phối nội dung tĩnh qua **CloudFront** lấy từ **S3 (Frontend Bucket)**.  
-Khi người dùng đăng nhập, tìm kiếm hoặc mở sách, yêu cầu được gửi đến **EC2 (Spring Boot Backend)**. EC2 truy cập cơ sở dữ liệu **RDS MySQL** trong private subnet để lấy thông tin người dùng, sách và đánh giá, đồng thời truy xuất file từ **S3 private bucket**.  
-Khi cần thông báo hoặc hỗ trợ, hệ thống gửi email qua **Amazon SES**.  
-Toàn bộ mã nguồn backend được build và triển khai tự động thông qua **CodePipeline → CodeBuild → CodeDeploy**, và được giám sát qua **CloudWatch**.  
+![Auction System Architecture](/static/images/2-Proposal/Proposal.jpg)
 
-*Các dịch vụ AWS chính:*  
-- **Amazon EC2**: chạy backend Spring Boot.  
-- **Amazon RDS (MySQL)**: lưu trữ dữ liệu người dùng, sách, đánh giá.  
-- **Amazon S3 + CloudFront**: lưu trữ và phân phối nội dung web và file sách.  
-- **Amazon SES**: gửi email xác nhận, hỗ trợ người dùng.  
-- **Amazon IAM**: quản lý quyền truy cập giữa EC2, S3, và SES.  
-- **Amazon CodePipeline/CodeBuild/CodeDeploy**: tự động hóa triển khai.  
-- **Amazon CloudWatch**: theo dõi log, hiệu năng và cảnh báo chi phí.  
+*Dịch vụ AWS sử dụng*  
+- *AWS VPC*: Tạo môi trường mạng ảo riêng tư.
+- *AWS Route 53*: Điều hướng traffic của người dùng.
+- *AWS CloudFront*: CDN giúp tăng tốc độ tải trang, giảm độ trễ truy cập web.
+- *AWS Load Balancing*: Nhận request từ internet và điều hướng đến EC2, ổn định ứng dụng.
+- *Amazon EC2*: Chạy ứng dụng springboot để xử lí backend, giao tiếp với database (RDS), cache query (ElastiCache), gọi các service AI (Rekognition, Textract) và xử lí đấu giá.
+- *Amazon S3*: 
+  1. Hosting Frontend: Lưu trữ source code của frontend (ReactJS, Tailwind) để CloudFront phân phối.
+  2. Data storage: 2 bucket (public/private) để lưu trữ ảnh người dùng tải lên phục vụ cho đấu giá và xác minh tài khoản.
+- *Amazon ElastiCache*: Bộ nhớ đệm, giúp lưu trữ truy vấn giảm tải cho database và tăng tốc độ phản hồi API.
+- *Amazon RDS*: Lưu trữ dữ liệu chính của hệ thống, được đặt tại private subnet.
+- *Amazon Rekognition*: Dịch vụ phân tích hình ảnh bằng AI, thực hiện so sánh khuôn mặt (Face Compare) giữa ảnh chụp selfie và ảnh trên giấy tờ tùy thân để xác minh danh tính (eKYC).
+- *Amazon Textract*: Dịch vụ trích xuất văn bản từ tài liệu. Hệ thống sử dụng Textract để tự động đọc (OCR) và bóc tách thông tin từ ảnh chụp giấy tờ tùy thân để điền tự động cho người dùng.
+- *Amazon SES*: Backend sử dụng dịch vụ này để gửi email xác thực tài khoản (OTP), thông báo thắng đấu giá hoặc các thông báo hệ thống khác tới người dùng.
+- *Amazon CloudWatch*: Hệ thống giám sát và quản lý log.
 
----
+
+*Thiết kế thành phần*
+- *Tiếp nhận dữ liệu*: Dữ liệu từ người dùng.  
+- *Lưu trữ dữ liệu*: Dữ liệu lưu ở 2 S3 bucket (1 cho public và 1 cho private - truy cập qua presigned url) 
+- *Xử lý dữ liệu*: EC2 thực hiện việc xử lí dữ liệu.  
+- *Giao diện web*: Amazon S3 lưu trữ ứng dụng ReactJS.  
+
 
 ### 4. Triển khai kỹ thuật  
-
 *Các giai đoạn triển khai*  
-1. **Phát triển cục bộ (1–2 tuần)**: thiết kế cơ sở dữ liệu, viết API cho người dùng và quản lý sách, tạo giao diện đọc PDF bằng HTML/JS.  
-2. **Thiết lập AWS (2 tuần)**: tạo EC2, RDS, S3, CloudFront, SES và cấu hình IAM Role bảo mật.  
-3. **Tích hợp CI/CD (1 tuần)**: thiết lập CodePipeline – CodeBuild – CodeDeploy để tự động build và cập nhật ứng dụng.  
-4. **Kiểm thử & demo (1 tuần)**: kiểm tra các chức năng đọc sách, đánh giá, gửi email, đăng nhập/đăng ký và quản lý nội dung.  
+Dự án gồm các giai đoạn:  
+1. *Nghiên cứu và vẽ kiến trúc*: Nghiên cứu và thiết kế kiến trúc AWS, xác định các dịch vụ sẽ sử dụng, thiết kế database.  
+2. *Tính toán chi phí và kiểm tra tính khả thi*: Sử dụng AWS Pricing Calculator để ước tính và điều chỉnh.
+3. *Phát triển, kiểm thử, triển khai*: Lập trình Springboot và ứng dụng ReactJS, sau đó kiểm thử ở môi trường local.  
+4. *Triển khai trên môi trường Cloud AWS*: Thiết lập Gitlab CI, thiết lập môi trường cloud và triển khai.
 
-*Yêu cầu kỹ thuật*  
-- Java 17 + Spring Boot  
-- MySQL (local → RDS)  
-- HTML/CSS/JavaScript (Vanilla JS + PDF.js)  
-- AWS SDK for Java (S3 + SES)  
-- GitHub, CodePipeline/CodeBuild/CodeDeploy  
-- Postman, CloudWatch  
-
----
+*Yêu cầu kỹ thuật*
+- Java 21 Springboot
+- AWS SDK (S3, Rekognition, Textract, SES)
+- MySQL RDS
+- ReactJS/Vite/TypeScript/Tailwind
+- Gitlab, Gitlab runner CI
+- Postman, CloudWatch
 
 ### 5. Lộ trình & Mốc triển khai  
-
-- **Tháng 1**: Thiết kế database, viết API và giao diện cơ bản.  
-- **Tháng 2**: Cấu hình AWS RDS, S3, CloudFront, SES.  
-- **Tháng 3**: Tích hợp CI/CD, kiểm thử và trình diễn bản demo CloudRead.  
-
----
+- *Trước thực tập (Tháng 0)*: 1 tháng lên kế hoạch và đánh giá trạm cũ.  
+- *Thực tập (Tháng 1–3)*:  
+    - Tháng 1: Học AWS và thiết kế kiến trúc, thiết kế database, triển khai xây dựng API.  
+    - Tháng 2: Triển khai xây dựng API, xây dựng giao diện.  
+    - Tháng 3: Triển khai trên môi trường cloud , kiểm thử, đưa vào sử dụng.
 
 ### 6. Ước tính ngân sách  
+Có thể xem chi phí trên [AWS Pricing Calculator](https://calculator.aws/#/estimate?id=05741eefd9e403091e36a896361a601881ad0aa9)
 
-Chi phí vận hành hệ thống CloudRead ước tính khoảng **15–17 USD/tháng**, bao gồm EC2 (~6.5 USD), RDS (~7 USD), S3 và CloudFront (~0.7 USD), SES (~0.15 USD), CI/CD (~1 USD) và CloudWatch (~0.1 USD).  
-Khi tận dụng **AWS Free Tier** và **AWS Student Credit ($100)**, chi phí thực tế gần như bằng **0 USD/tháng** trong giai đoạn đầu.  
+*Chi phí hạ tầng*
+- Amazon Route53: $0.5/tháng (1 hosted zone)
+- S3 Standard: $0.72/tháng (10 GB, 30000 request GET, 1000 request PUT, 5 GB Transfer out)
+- Application Load Balancer: $18.80/tháng (data process 50GB) 
+- Amazon EC2 (t3.medium): $16.35/tháng (3yr, no upfront)
+- Amazon ElastiCache (cache.t3.micro): $9.49/tháng (3yr, no upfront)
+- Amazon RDS: $8.38/tháng
+- Rekognition: $0.13/tháng (100 FaceCompare)
+- Textract: $5/tháng (200 Pages document)
 
----
+*Tổng*: $59.37/tháng.
+
 
 ### 7. Đánh giá rủi ro  
+*Ma trận rủi ro*  
+- Mất mạng: Ảnh hưởng lớn, xác suất thấp.
+- Vượt ngân sách: Ảnh hưởng trung bình, xác suất thấp.  
 
-Các rủi ro chính bao gồm mất kết nối dịch vụ AWS, rò rỉ dữ liệu và vượt mức chi phí miễn phí.  
-Giải pháp phòng ngừa gồm:  
-- Thiết lập **bucket private + Signed URL** cho file sách.  
-- Cấu hình **Billing Alarm** theo dõi chi phí.  
-- Xác thực domain SES để đảm bảo gửi mail ổn định.  
-- Tạo snapshot định kỳ cho EC2 và RDS.  
-Nếu pipeline bị lỗi, nhóm có thể **rollback thủ công** sang bản ổn định.  
+*Chiến lược giảm thiểu*
+- Chi phí: Cảnh báo ngân sách AWS, tối ưu dịch vụ.  
 
-*Giải pháp dự phòng:*  
-- Giữ bản chạy local để demo khi offline.  
-- Theo dõi log bằng CloudWatch và kiểm soát chi phí thường xuyên.  
+*Kế hoạch dự phòng*  
+- Có backup định kì đề phòng xảy ra sự cố.  
+- Sử dụng CloudFormation để khôi phục cấu hình liên quan đến chi phí.  
 
----
-
-### 8. Kết quả kỳ vọng  
-
-Khi hoàn thành, **CloudRead** sẽ là một nền tảng đọc và quản lý ebook trực tuyến hoàn chỉnh, triển khai thật trên AWS.  
-Dự án giúp nhóm nắm vững kỹ năng full-stack và DevOps cơ bản: phát triển, triển khai, giám sát và tối ưu chi phí hệ thống cloud.  
-Về lâu dài, CloudRead có thể mở rộng thêm tính năng cộng đồng, gợi ý sách, đồng bộ thiết bị và xác thực người dùng qua **Amazon Cognito**.  
-
----
+### 8. Kết quả kỳ vọng
+*Giá trị dài hạn*: Có thể tái sử dụng cho các dự án khác trong tương lai.

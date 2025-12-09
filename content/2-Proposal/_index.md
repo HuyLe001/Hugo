@@ -1,123 +1,107 @@
 ---
 title: "Proposal"
-date: "2025-11-11"
+date: "`r Sys.Date()`"
 weight: 2
 chapter: false
 pre: " <b> 2. </b> "
 ---
 
-{{% notice warning %}}
+# Auction system built in AWS Cloud infrastructure
 
-{{% /notice %}}
+## Auction web system built on Amazon Web Service cloud platform
 
-# CloudRead – Online Ebook Reading Platform  
-## Online Book Reading and Management Solution on Java + AWS Platform  
+### 1. Executive Summary
+The Auction system is designed by a FPTU student in Ho Chi Minh City and operates on the AWS Cloud platform. The platform utilizes AWS services to build an online auction marketplace with a user-friendly interface, easy to use and suitable for everyone.
 
-### 1. Executive Summary  
-**CloudRead** is an academic project by a team of 5 Information Technology students, aimed at developing an electronic book (ebook) reading and management platform running on **AWS infrastructure**.  
-Users can register accounts, search for and read ebooks online through an integrated PDF reader, while receiving email notifications or password recovery support via **Amazon SES**.  
-The system is developed using **Spring Boot (Java 17)** for the backend, **HTML/CSS/JavaScript (Vanilla JS)** for the frontend, and deployed on **AWS** with services including **EC2, RDS, S3, CloudFront, SES, IAM, CloudWatch, and CodePipeline**.  
-The project's goal is to build a stable, low-cost, scalable digital book reading platform with high academic value.  
+### 2. Problem Statement
+*Current Problem*
+Currently, auction systems have not reached many people due to difficulties in accessibility. This project was born to bring a transparent live auction platform that is friendly and accessible to everyone.
 
----
+*Solution*
+The platform uses AWS CloudFront and S3 Storage combined with ReactJS to provide the web interface, with EC2 servers handling all processing tasks on the Springboot platform, Amazon S3 for storing public and private data, and AWS RDS for database storage. Combined with Amazon Rekognition and Textract to extract information and verify user information to ensure fairness. With this platform, users can register new accounts, verify identities, and participate in exciting auctions on the platform.
 
-### 2. Problem Statement  
+*Benefits and Return on Investment (ROI)*
+The project brings an online auction platform that is easily accessible to everyone. Estimated monthly cost is $59.37 USD (according to AWS Pricing Calculator). No additional development costs incurred.
 
-*Current Problem*  
-Most free ebook platforms like **nhasachmienphi.com** only allow users to download or read directly, lacking basic features such as user roles, access statistics, or content ratings.  
-Additionally, many commercial platforms have high deployment and operating costs, unsuitable for student-scale or academic projects.  
+### 3. Solution Architecture
+The platform applies AWS architecture for data management. Public data is stored in public S3 buckets and displayed to users via CloudFront and S3 with ReactJS. All processing operations are performed on EC2 with the Springboot platform. Identity information is processed by Amazon Rekognition and Textract and then stored in private S3 buckets.
 
-*Solution*  
-CloudRead is designed as a learning platform – a technology demonstration that helps:  
-- Store and distribute ebooks via **Amazon S3 + CloudFront (Signed URL)**.  
+![Auction System Architecture](/static/images/2-Proposal/Proposal.jpg)
 
-- Manage users, books, and reviews via **Amazon RDS MySQL**.  
-- Deploy Spring Boot backend directly on **Amazon EC2**.  
-- Publish static frontend interface via **S3 + CloudFront**.  
-- Send confirmation emails and user support via **Amazon SES (SMTP)**.  
-- Automate build & deploy processes using **AWS CodePipeline → CodeBuild → CodeDeploy**.  
-- Monitor logs, performance, and costs via **Amazon CloudWatch**.  
+*AWS Services Used*
+- *AWS VPC*: Create a private virtual network environment.
+- *AWS Route 53*: Route user traffic.
+- *AWS CloudFront*: CDN helps accelerate page loading speed, reduce web access latency.
+- *AWS Load Balancing*: Receive requests from the internet and route to EC2, stabilizing the application.
+- *Amazon EC2*: Run springboot application to handle backend processing, communicate with database (RDS), cache queries (ElastiCache), call AI services (Rekognition, Textract) and process auctions.
+- *Amazon S3*:
+  1. Hosting Frontend: Store frontend source code (ReactJS, Tailwind) for CloudFront distribution.
+  2. Data storage: 2 buckets (public/private) to store images uploaded by users for auctions and account verification.
+- *Amazon ElastiCache*: Cache memory, helping store queries to reduce load for database and accelerate API response speed.
+- *Amazon RDS*: Store main system data, placed in private subnet.
+- *Amazon Rekognition*: AI image analysis service, performing Face Compare between selfie photos and ID photos to verify identity (eKYC).
+- *Amazon Textract*: Text extraction service from documents. The system uses Textract to automatically read (OCR) and extract information from ID photos to automatically fill for users.
+- *Amazon SES*: Backend uses this service to send account verification emails (OTP), auction winning notifications or other system notifications to users.
+- *Amazon CloudWatch*: Service for monitoring and log management.
 
-*Benefits & ROI*  
-- Helps students practice the complete development and deployment process of real cloud applications.  
-- Easy to operate, can run 24/7 on AWS with low costs.  
-- Strengthens knowledge of distributed systems, security, DevOps, and infrastructure optimization.  
-- The product can be expanded with additional learning, sharing, and book categorization features in the future.  
 
----
+*Component Design*
+- *Data Ingestion*: Data from users.
+- *Data Storage*: Data stored in 2 S3 buckets (1 for public and 1 for private - accessed via presigned url)
+- *Data Processing*: EC2 performs data processing.
+- *Web Interface*: Amazon S3 stores ReactJS application.
 
-### 3. Solution Architecture  
 
-CloudRead uses a **3-tier model combined with AWS services**.  
-Users access the website through **Route 53**, receiving static content distributed via **CloudFront** from **S3 (Frontend Bucket)**.  
-When users log in, search, or open books, requests are sent to **EC2 (Spring Boot Backend)**. EC2 accesses the **RDS MySQL** database in a private subnet to retrieve user, book, and review information, while also accessing files from **S3 private bucket**.  
-When notifications or support are needed, the system sends emails via **Amazon SES**.  
-The entire backend source code is built and deployed automatically through **CodePipeline → CodeBuild → CodeDeploy**, and monitored via **CloudWatch**.  
+### 4. Technical Implementation
+*Implementation Stages*
+The project includes the following stages:
+1. *Research and Architecture Design*: Research and design AWS architecture, identify services to be used, design database.
+2. *Cost Calculation and Feasibility Check*: Use AWS Pricing Calculator to estimate and adjust.
+3. *Development, Testing, Deployment*: Program Springboot and ReactJS application, then test in local environment.
+4. *Deployment on AWS Cloud Environment*: Set up Gitlab CI, set up cloud environment and deploy.
 
-*Main AWS Services:*  
-- **Amazon EC2**: runs Spring Boot backend.  
-- **Amazon RDS (MySQL)**: stores user, book, and review data.  
-- **Amazon S3 + CloudFront**: stores and distributes web content and book files.  
-- **Amazon SES**: sends confirmation and user support emails.  
-- **Amazon IAM**: manages access permissions between EC2, S3, and SES.  
-- **Amazon CodePipeline/CodeBuild/CodeDeploy**: automates deployment.  
-- **Amazon CloudWatch**: monitors logs, performance, and cost alerts.  
+*Technical Requirements*
+- Java 21 Springboot
+- AWS SDK (S3, Rekognition, Textract, SES)
+- MySQL RDS
+- ReactJS/Vite/TypeScript/Tailwind
+- Gitlab, Gitlab runner CI
+- Postman, CloudWatch
 
----
+### 5. Roadmap & Implementation Milestones
+- *Pre-internship (Month 0)*: 1 month for planning and evaluating the old station.
+- *Internship (Month 1–3)*:
+    - Month 1: Learn AWS and design architecture, design database, implement API construction.
+    - Month 2: Implement API construction, build interface.
+    - Month 3: Deploy on cloud environment, test, put into use.
 
-### 4. Technical Implementation  
+### 6. Budget Estimate
+Costs can be viewed on [AWS Pricing Calculator](https://calculator.aws/#/estimate?id=05741eefd9e403091e36a896361a601881ad0aa9)
 
-*Implementation Phases*  
-1. **Local Development (1–2 weeks)**: design database, write APIs for user and book management, create PDF reading interface using HTML/JS.  
-2. **AWS Setup (2 weeks)**: create EC2, RDS, S3, CloudFront, SES and configure secure IAM Roles.  
-3. **CI/CD Integration (1 week)**: set up CodePipeline – CodeBuild – CodeDeploy to automatically build and update the application.  
-4. **Testing & Demo (1 week)**: test book reading, review, email sending, login/registration, and content management features.  
+*Infrastructure Costs*
+- Amazon Route53: $0.5/month (1 hosted zone)
+- S3 Standard: $0.72/month (10 GB, 30000 request GET, 1000 request PUT, 5 GB Transfer out)
+- Application Load Balancer: $18.80/month (data process 50GB)
+- Amazon EC2 (t3.medium): $16.35/month (3yr, no upfront)
+- Amazon ElastiCache (cache.t3.micro): $9.49/month (3yr, no upfront)
+- Amazon RDS: $8.38/month
+- Rekognition: $0.13/month (100 FaceCompare)
+- Textract: $5/month (200 Pages document)
 
-*Technical Requirements*  
-- Java 17 + Spring Boot  
-- MySQL (local → RDS)  
-- HTML/CSS/JavaScript (Vanilla JS + PDF.js)  
-- AWS SDK for Java (S3 + SES)  
-- GitHub, CodePipeline/CodeBuild/CodeDeploy  
-- Postman, CloudWatch  
+*Total*: $59.37/month.
 
----
 
-### 5. Roadmap & Milestones  
+### 7. Risk Assessment
+*Risk Matrix*
+- Network Loss: High impact, low probability.
+- Budget Overrun: Medium impact, low probability.
 
-- **Month 1**: Design database, write APIs and basic interface.  
-- **Month 2**: Configure AWS RDS, S3, CloudFront, SES.  
-- **Month 3**: Integrate CI/CD, test and present CloudRead demo version.  
+*Mitigation Strategy*
+- Cost: AWS budget alerts, service optimization.
 
----
+*Contingency Plan*
+- Periodic backups in case of incidents.
+- Use CloudFormation to restore cost-related configurations.
 
-### 6. Budget Estimate  
-
-The operating cost of the CloudRead system is estimated at approximately **$15–17 USD/month**, including EC2 (~$6.5 USD), RDS (~$7 USD), S3 and CloudFront (~$0.7 USD), SES (~$0.15 USD), CI/CD (~$1 USD), and CloudWatch (~$0.1 USD).  
-When leveraging **AWS Free Tier** and **AWS Student Credit ($100)**, the actual cost is nearly **$0 USD/month** during the initial phase.  
-
----
-
-### 7. Risk Assessment  
-
-Main risks include AWS service connectivity loss, data breaches, and exceeding free tier limits.  
-Preventive measures include:  
-- Set up **private bucket + Signed URL** for book files.  
-- Configure **Billing Alarm** to monitor costs.  
-- Verify SES domain to ensure stable email delivery.  
-- Create periodic snapshots for EC2 and RDS.  
-If the pipeline fails, the team can **manually rollback** to a stable version.  
-
-*Contingency Solutions:*  
-- Keep a local running version for offline demos.  
-- Monitor logs using CloudWatch and regularly control costs.  
-
----
-
-### 8. Expected Results  
-
-Upon completion, **CloudRead** will be a complete online ebook reading and management platform, deployed on AWS.  
-The project helps the team master full-stack and basic DevOps skills: development, deployment, monitoring, and cloud system cost optimization.  
-In the long term, CloudRead can be expanded with community features, book recommendations, device synchronization, and user authentication via **Amazon Cognito**.  
-
----
+### 8. Expected Results
+*Long-term Value*: Can be reused for other projects in the future.
